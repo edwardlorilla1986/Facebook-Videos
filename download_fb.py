@@ -1,10 +1,11 @@
 import yt_dlp
 import sys
 
-def download_facebook_video(url, output_path="downloads"):
+def download_facebook_video(url, output_path="downloads", cookies_file="cookies.txt"):
     ydl_opts = {
         'outtmpl': f'{output_path}/%(title)s.%(ext)s',
-        'format': 'bestvideo+bestaudio/best'
+        'format': 'bestvideo+bestaudio/best',
+        'cookies': cookies_file  # Pass Facebook cookies
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
