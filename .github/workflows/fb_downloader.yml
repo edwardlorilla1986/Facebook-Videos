@@ -1,7 +1,7 @@
 name: Facebook Video Downloader
 
 on:
-  workflow_dispatch:  # Allows manual triggering from GitHub Actions UI
+  workflow_dispatch:  # Allows manual trigger
 
 jobs:
   download:
@@ -19,8 +19,11 @@ jobs:
       - name: Install Dependencies
         run: pip install yt-dlp
 
+      - name: Create Cookies File
+        run: echo "${{ secrets.FB_COOKIES }}" > cookies.txt  # Use GitHub Secret for cookies
+
       - name: Download Facebook Video
-        run: python download_fb.py "https://fb.watch/xOm2K88CnS/"
+        run: python download_fb.py "${{ secrets.FB_VIDEO_URL }}"
 
       - name: Upload Video Artifact
         uses: actions/upload-artifact@v4
