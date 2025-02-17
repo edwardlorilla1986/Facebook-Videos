@@ -1,0 +1,29 @@
+name: Facebook Video Downloader
+
+on:
+  workflow_dispatch:  # Allows manual triggering from GitHub Actions UI
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: pip install yt-dlp
+
+      - name: Download Facebook Video
+        run: python download_fb.py "https://fb.watch/xOm2K88CnS/"
+
+      - name: Upload Video Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: downloaded-video
+          path: downloads/
