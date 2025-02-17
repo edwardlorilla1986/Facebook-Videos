@@ -1,4 +1,4 @@
-  import yt_dlp
+import yt_dlp
 import sys
 
 def download_facebook_video(url, output_path="downloads"):
